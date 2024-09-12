@@ -26,10 +26,11 @@ void found_letter(const char str[], int* str_i)
 int arr_str_quant(char* arr)
 {
     int str_quant = 0;
-    for (int i = 0; arr[i] != '\0'; i++)
+    for (int i = 1; arr[i] != '\0'; i++)
     {   
-        if (arr[i] == '\n')
+        if (arr[i] == '\n' && arr[i - 1] != '\n') 
         {
+
             str_quant++;
         }
     }

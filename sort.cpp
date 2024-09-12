@@ -33,6 +33,7 @@ int comp_for_str(const char* str1, const char* str2)
 // сортировка пузырьком
 void text_sort(const char** text, const int size)
 {   
+    printf("\nSSSSS\n");
     for (int max_i = size; max_i > 0; max_i--)
     {
         for (int i = 1; i < max_i; i++)

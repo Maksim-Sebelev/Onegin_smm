@@ -13,18 +13,24 @@ const char* file_with_onegin = "onegin.txt";
 
 int main(const int argc, const char* argv[])
 {
-    int text_lines_quant = 16;
-    const char** text;
+    int text_lines_quant = 0;
+    const char** text = NULL;
+    // printf("\nQQQQQ\n");
     text = file_to_text(file_with_onegin, &text_lines_quant);
 
 
-    // for (int i = 0; i < 16; i++)
+
+    // printf("%d\n\n", text_lines_quant);
+    
+    // for (int i = 0; i < text_lines_quant; i++)
     // {
-    //     printf("%s\n", text[i]);
+    //     printf("%d    %s\n", i, text[i]);
     // }
 
+    // printf("\n\nAAAA\n\n");
+    
     text_sort(text, text_lines_quant);
-
+    // printf("\n\nBBBB\n");
     Call_Flags(argc, argv, text, text_lines_quant);
 
 

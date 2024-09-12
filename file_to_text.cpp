@@ -27,11 +27,13 @@ char* make_buffer(const char* file_name, int* buffer_len, int* text_str_quant)
     fread(buffer, sizeof(char*), *buffer_len, fp);
 
 
-    buffer[*buffer_len] = '\0'; 
+    buffer[*buffer_len] = '\0';
 
     // printf("\nqqqq\n");
     // printf("%d\n", *text_str_quant);
-    // *text_str_quant = arr_str_quant(buffer);
+
+    *text_str_quant = arr_str_quant(buffer);
+    
     // printf("%d\n", *text_str_quant);
     // printf("\nqqqqq\n");
 
