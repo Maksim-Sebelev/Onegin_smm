@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <assert.h>
 #include "helper_func.h"
+#include "color_output.h"
 
 
 /**
@@ -17,9 +18,7 @@
  * \param str2 - вторая из сравниваемых строк 
  */
 
-int comp_for_str(const char* str1, const char* str2);
-
-
+int back_comp_str(const void* const str1, const void* const str2);
 
 
 /**
@@ -29,7 +28,7 @@ int comp_for_str(const char* str1, const char* str2);
  * \param second_sort_elem - индекс конца подмассива для сортироки (НЕвключительно)
  */
 
-void quick_text_sort(const char* text[], int first_sort_elem, int second_sort_elem);
+void quick_sort(void* text, size_t text_size, size_t text_elem_size, int comp(const void* const, const void* const));
 
 
 
@@ -40,7 +39,7 @@ void quick_text_sort(const char* text[], int first_sort_elem, int second_sort_el
  * \param size - длина сортируемого массива(кол-во строк)
  */
 
-void text_sort(const char** text, const int size);
+void text_sort(struct Text_param* text_par);
 
 
 #endif

@@ -1,6 +1,6 @@
 CC = g++
 CFLAGS = -c -Wall
-FILES_CPP = main.cpp sort.cpp helper_func.cpp color_output.cpp flags.cpp file_to_text.cpp
+FILES_CPP = main.cpp sort.cpp helper_func.cpp color_output.cpp flags.cpp file_text.cpp text_file.cpp
 OBJECTS = $(FILES_CPP:.cpp=.o)
 OBJECTS_H = $(FILES_CPP:.cpp=.h)
 
@@ -15,4 +15,7 @@ main: $(OBJECTS)
 
 clean:
 	rm -rf *.o hello
+
+clean.exe:
+	rm -rf *.exe hello
 

@@ -4,11 +4,19 @@
 #include <stdio.h>
 #include <malloc.h>
 #include <string.h>
-#include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
+#include <assert.h>
 #include "helper_func.h"
+#include "color_output.h"
 
+
+
+enum Has_str_letter
+{   
+    STR_HAS_LETTER = 0,
+    STR_HAS_NOT_LETTER
+};
 
 /**
  * Функция make_buffer создает возвращает указатель на буффер, в который будет скопирован файл.
@@ -17,7 +25,7 @@
  * \param text_str_quant - кол-во строк в читаемом файле, называется text, так как в дальнейшем такую длину будет иметь массив text.
  */
 
-char* make_buffer(const char* file_name, int* buffer_len, int* text_str_quant);
+char* read_buffer_from_file(struct Text_param* text_par, struct Inp_Out_files file);
 
 /**
  * Функция make_text возвращает указатель на массив указателей text, в который по строкам передается массив buffer.
@@ -26,7 +34,7 @@ char* make_buffer(const char* file_name, int* buffer_len, int* text_str_quant);
  * \param buffer_len - кол-во элементов в массиве buffer, из которого и получается массив text.
  */
 
-const char** make_text(char* buffer, int text_str_quant, int buffer_len);
+struct Line* read_text_from_buffer(char* buffer, struct Text_param text_par);
 
 /**
  * Функция file_to_text построчно копирует (делает массив указателей) строки из файла в массив (с помощью функций make_buffer и make_text).
@@ -35,7 +43,9 @@ const char** make_text(char* buffer, int text_str_quant, int buffer_len);
  */
  
 
-const char** file_to_text(const char* file_name, int* text_str_quant);
+struct Line* read_text_from_file(struct Text_param* text_par, struct Inp_Out_files file);
+
+
 
 
 #endif

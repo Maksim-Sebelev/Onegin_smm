@@ -5,36 +5,20 @@
 #include "helper_func.h"
 #include "color_output.h"
 #include "flags.h"
-#include "file_to_text.h"
+#include "file_text.h"
+#include "text_file.h"
 
-
-const char* file_with_onegin = "onegin.txt";
 
 
 int main(const int argc, const char* argv[])
 {
-    int text_lines_quant = 0;
-    const char** text = NULL;
-    // printf("\nQQQQQ\n");
-    text = file_to_text(file_with_onegin, &text_lines_quant);
+    struct Text_param text_par = {};
+    struct Inp_Out_files file = {};
 
+    Call_Flags(argc, argv, &text_par, &file);
 
+    make_final_file(text_par, file);
 
-    // printf("%d\n\n", text_lines_quant);
-    
-    // for (int i = 0; i < text_lines_quant; i++)
-    // {
-    //     printf("%d    %s\n", i, text[i]);
-    // }
-
-    // printf("\n\nAAAA\n\n");
-    
-    text_sort(text, text_lines_quant);
-    // printf("\n\nBBBB\n");
-    Call_Flags(argc, argv, text, text_lines_quant);
-
-
-    free(text);
+    free(text_par.text);
     return 0;
 }
-

@@ -1,105 +1,72 @@
 #include "sort.h"
-#include "color_output.h"
 
-
-
-int comp_for_str(const char* str1, const char* str2)
+int back_comp_str(const void* const str1, const void* const str2)
 {
-    int str1_i = 0, str2_i = 0;
+    struct Line str1_copy = *(struct Line*)str1;
+    struct Line str2_copy = *(struct Line*)str2;
 
-    while(str1[str1_i] != EOF && str1[str1_i] != '\0' && str1[str1_i] != '\r' && str1[str1_i] != '\n')
-    {
-        str1_i++;
-    } 
-
-    while(str2[str2_i] != EOF && str2[str2_i] != '\0' && str2[str2_i] != '\r' && str2[str2_i] != '\n')
-    {
-        str2_i++;
-    }
-
+    int str1_i = 0;
+    int str2_i = 0;
+    str1_i = str1_copy.str_len;
+    str2_i = str2_copy.str_len;
 
     do
     {
-        found_letter(--str1, &str1_i);
-        found_letter(--str2, &str2_i);
+        find_last_letter(--str1_copy.str_begin_ptr, &str1_i);
+        find_last_letter(--str2_copy.str_begin_ptr, &str2_i);
     } 
-    while((tolower(str1[str1_i]) == tolower(str2[str2_i])) && (str1_i >= 0) && (str2_i >= 0));
+    while((tolower(str1_copy.str_begin_ptr[str1_i]) == tolower(str2_copy.str_begin_ptr[str2_i])) && (str1_i >= 0) && (str2_i >= 0));
     
-    return tolower(str2[str2_i]) - tolower(str1[str1_i]);
+    return tolower(str1_copy.str_begin_ptr[str1_i]) - tolower(str2_copy.str_begin_ptr[str2_i]);
 }
 
 
-
-// сортировка пузырьком
-void text_sort(const char** text, const int size)
-{   
-    printf("\nSSSSS\n");
-    for (int max_i = size; max_i > 0; max_i--)
-    {
-        for (int i = 1; i < max_i; i++)
-        {
-            if (comp_for_str(text[i], text[i - 1]) > 0)
-            {
-                my_swap(&text[i], &text[i - 1]);
-            }
-        }
-    }
-}
-
-
-void quick_text_sort(const char* text[], int first_sort_elem, int last_sort_elem)
+void quick_sort(void* arr, size_t arr_size, size_t size_arr_elem, int compare(const void* const, const void* const))
 {
-    if (last_sort_elem - first_sort_elem == 1)
+    assert((char*)arr != NULL);
+    assert(arr_size >= 0);
+    assert(size_arr_elem > 0);
+    if (arr_size <= 1)
     {
         return;
-    }   
+    }
 
-    char* left_text[last_sort_elem - first_sort_elem];
-    char* right_text[last_sort_elem - first_sort_elem];
-
-    int ref_elem = (first_sort_elem + last_sort_elem) / 2;
-
-    for (int i = first_sort_elem; i < last_sort_elem; i++)
+    size_t right = arr_size - 1;
+    size_t ref = 0;
+    
+    while (ref < right)
     {
-        if (comp_for_str(text[ref_elem], text[i]) < 0)
+        while (compare((char*)arr + (int)(size_arr_elem * ref), (char*)arr + (int)(size_arr_elem * right)) < 0)
         {
-            // my_swap(&text[ref_elem], &text[i]);
-            left_text[i] = (char*)text[i];
+            right--;
         }
-        else
+
+        if (ref < right)
         {
-            right_text[i] = (char*)text[i];
+            swap(((char*)arr + (int)(size_arr_elem * ref)), ((char*)arr + (int)(size_arr_elem * right)), size_arr_elem);
+            ref++;
+            swap(((char*)arr + (int)(size_arr_elem * ref)), ((char*)arr + (int)(size_arr_elem * right)), size_arr_elem);
         }
     }
-    quick_text_sort((const char**)left_text, first_sort_elem, ref_elem);
-    quick_text_sort((const char**)right_text, ref_elem, last_sort_elem);
+
+    assert((char*)arr != NULL);
+    assert(ref >= 0);
+
+    assert((char*)arr != NULL);
+    assert(arr_size - ref - 1 >= 0);
+
+    assert(size_arr_elem > 0);
+
+    quick_sort((char*)arr, ref, size_arr_elem, compare);
+    quick_sort((char*)arr + (int)(size_arr_elem * (ref + 1)), arr_size - ref - 1, size_arr_elem, compare);
 }
 
 
-// void text_sort(const char* text[], const int size)
-// {
-//     quick_text_sort(text, 0, size);
-// }
-
-//рабочий вариант !!! но без учета не букв
-
-// // компаратор возращает 0 если строки равны, полож число если первая больше второй и отриц если наоборот
-
-// int comp_for_str(const char str1[], const char str2[])
-// {
-//     while(str1[++str1_i]);
-//     while(str2[++str2_i]);
-
-
-//     while((tolower(str1[str1_i]) == tolower(str2[str2_i])) && (str1_i >= 0) && (str2_i >= 0))
-//     {
-//         str1_i--;
-//         str2_i--;
-//     }
-
-//     // printf("%s XYJ %c    %s XYJ %c\n", str1, str1[str1_i], str2, str2[str2_i]);
-
-//     return tolower(str2[str2_i]) - tolower(str1[str1_i]);
-// }
-
-
+void text_sort(struct Text_param* text_par)
+{
+    assert(text_par->text != NULL);
+    assert(text_par->text_elem_size > 0);
+    assert(text_par->text_len >= 0);
+    assert(text_par->text_lines_quant >= 0);
+    quick_sort(text_par->text, text_par->text_lines_quant, text_par->text_elem_size, back_comp_str);
+}

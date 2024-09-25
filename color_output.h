@@ -1,6 +1,8 @@
 #ifndef COLOR_OUTPUT_H
 #define OCLOR_OUTPUT_H
 
+#include <stdio.h>
+#include <assert.h>
 #include "helper_func.h"
 
 #define ANSI_COLOR_WHITE  "\e[0;37m"
@@ -17,6 +19,15 @@
 #define RES ANSI_COLOR_RESET
 
 
+
+/**
+ * Функция print_final_text нужна для вывова массива строк построчно
+ * \param text - выводимый массив строк
+ * \param size - размер выводимого массива
+ */
+
+void print_final_text(struct Text_param text_par);
+
 /**
  * Макрос COLOR_PRINT_ALL_TEXT выводит весь передаваемый ему массив в одном цвете.
  * \param color - цвет, в который будет окрашен весь текст.
@@ -24,13 +35,12 @@
  * \param text_size 
  */
 
-#define COLOR_PRINT_ALL_TEXT(color, text, text_str_quant) do \
-{                                                             \
-    printf(color);                                             \
-    print_final_text(text, text_str_quant);                     \
-    printf(RES);                                                 \
-} while (0);                                                      \
-
+#define COLOR_PRINT_ALL_TEXT(color, text_par) do   \
+{                                                   \
+    printf(color);                                   \
+    print_final_text(text_par);                       \
+    printf(RES);                                       \
+} while (0);                                            \
 
 /**
  * Макрос COLOR_PRINT_ONE_STR выводит одну строку покрашенную в определенный цвет.
@@ -38,22 +48,24 @@
  * \param str - окращиваемая и выводимая строка.
 */
 
-#define COLOR_PRINT_ONE_STR(color, str) do \
-{                                           \
-    printf(color);                           \
-    printf("%s\n", str);                      \
-    printf(RES);                               \
-} while(0);                                     \
+#define COLOR_PRINT_ONE_STR(color, str) do                   \
+{                                                             \
+    if (strcmp(str, "\0") != 0 && strcmp(str, "\n") != 0)      \
+    {                                                           \
+        printf(color "%s\n" RES, str);                           \
+    }                                                             \
+} while(0);                                                        \
+
+
+#define COLOR_PRINT_ONE_SYMBOL(color, symb) do     \
+{                                                   \
+    printf(color);                                   \
+    printf("%c", symb);                               \
+    printf(RES);                                       \
+} while (0);                                            \
 
 
 
-/**
- * функция print_final_text нужна для вывова массива строк построчно
- * \param text - выводимый массив строк
- * \param size - размер выводимого массива
- */
-
-void print_final_text(const char* text[], const int size);
-
+void print_rt_str(const char* str, size_t str_num);
 
 #endif
