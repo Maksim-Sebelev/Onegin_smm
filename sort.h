@@ -5,8 +5,9 @@
 #include <ctype.h>
 #include <stdlib.h>
 #include <assert.h>
-#include "helper_func.h"
+#include "str_func.h"
 #include "color_output.h"
+#include "text.h"
 
 
 /**
@@ -40,6 +41,12 @@ void quick_sort(void* text, size_t text_size, size_t text_elem_size, int comp(co
  */
 
 void text_sort(struct Text_param* text_par);
+
+
+
+void swap_helper(void* p1, void* p2, size_t* size_type, size_t size_swap_type);
+
+void swap(void* p1, void* p2, size_t size);
 
 
 #endif

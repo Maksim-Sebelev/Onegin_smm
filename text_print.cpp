@@ -1,6 +1,12 @@
+#include <assert.h>
+#include <string.h>
+#include <ctype.h>
+#include "text_print.h"
 #include "color_output.h"
+#include "text.h"
 
-void print_final_text(struct Text_param text_par)
+
+void print_text(struct Text_param text_par)
 {
     assert(text_par.text != NULL);
     assert(text_par.text_elem_size > 0);
@@ -30,9 +36,9 @@ void print_rt_str(const char* str, size_t str_num)
             printf("%c", *str);
             str++;
         }
-        printf(RED "%c" RES, toupper(*str));
+        COLOR_PRINT(RED, "%c", toupper(*str));
         str++;
-        printf(RED "%c" RES, toupper(*str));
+        COLOR_PRINT(RED, "%c", toupper(*str));
         str++;
     }
    
@@ -44,4 +50,3 @@ void print_rt_str(const char* str, size_t str_num)
     printf("\n");
     return;
 }
-

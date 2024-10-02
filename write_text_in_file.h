@@ -2,9 +2,11 @@
 #define TEXT_TO_FILE_H
 
 #include <stdio.h>
-#include "helper_func.h"
-#include "file_text.h"
+#include "str_func.h"
+#include "read_text_from_file.h"
 #include "sort.h"
+#include "text.h"
+
 
 /**
  * Функция text_to_buffer переводит массив указателей на строки в одномерный массив.
@@ -36,7 +38,6 @@ void make_final_file(struct Text_param text_par, struct Inp_Out_files file);
 /**
  * 
  */
-
 void make_final_text(struct Text_param* text_par, struct Inp_Out_files file);
 
 

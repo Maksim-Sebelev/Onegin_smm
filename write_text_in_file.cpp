@@ -1,4 +1,7 @@
-#include "text_file.h"
+#include "write_text_in_file.h"
+
+
+//----------------------------------------------------------------------------------------------------------------------------------
 
 char* write_text_in_buffer(struct Text_param text_par)
 {
@@ -32,6 +35,7 @@ char* write_text_in_buffer(struct Text_param text_par)
     return buffer;
 }
 
+//----------------------------------------------------------------------------------------------------------------------------------
 
 void write_text_in_file(struct Text_param text_par, struct Inp_Out_files file)
 {
@@ -57,14 +61,17 @@ void write_text_in_file(struct Text_param text_par, struct Inp_Out_files file)
     return;
 }
 
+//----------------------------------------------------------------------------------------------------------------------------------
 
 void make_final_file(struct Text_param text_par, struct Inp_Out_files file)
 {
+
     text_par.text = read_text_from_file(&text_par, file);
     assert(text_par.text != NULL);
     assert(text_par.text_elem_size > 0);
     assert(text_par.text_len >= 0);
     assert(text_par.text_lines_quant >= 0);
+
 
     text_sort(&text_par);
     assert(text_par.text != NULL);
@@ -74,11 +81,12 @@ void make_final_file(struct Text_param text_par, struct Inp_Out_files file)
 
     write_text_in_file(text_par, file);
 
-    free(text_par.text);
-    text_par.text = NULL;
+    // free(text_par.text);
+    // text_par.text = NULL;
     return;
 }
 
+//----------------------------------------------------------------------------------------------------------------------------------
 
 void make_final_text(struct Text_param* text_par, struct Inp_Out_files file)
 {
@@ -96,3 +104,5 @@ void make_final_text(struct Text_param* text_par, struct Inp_Out_files file)
     
     return;
 }
+
+//----------------------------------------------------------------------------------------------------------------------------------

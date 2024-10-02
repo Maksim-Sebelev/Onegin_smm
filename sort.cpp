@@ -1,4 +1,5 @@
 #include "sort.h"
+#include "text.h"
 
 int back_comp_str(const void* const str1, const void* const str2)
 {
@@ -69,4 +70,28 @@ void text_sort(struct Text_param* text_par)
     assert(text_par->text_len >= 0);
     assert(text_par->text_lines_quant >= 0);
     quick_sort(text_par->text, text_par->text_lines_quant, text_par->text_elem_size, back_comp_str);
+}
+
+
+
+void swap_helper(void* p1, void* p2, size_t* size_type, size_t size_swap_type)
+{
+    while (*size_type >= size_swap_type)
+    {
+        char* buffer[size_swap_type];
+        memcpy(buffer, p1, size_swap_type);
+        memcpy(p1, p2, size_swap_type);
+        memcpy(p2, buffer, size_swap_type);
+        *size_type -= size_swap_type;
+    }
+    return;
+}
+
+void swap(void* p1, void* p2, size_t size_type)
+{
+    swap_helper(p1, p2, &size_type, sizeof(uint64_t));
+    swap_helper(p1, p2, &size_type, sizeof(uint32_t));
+    swap_helper(p1, p2, &size_type, sizeof(uint16_t));
+    swap_helper(p1, p2, &size_type, sizeof(uint8_t));
+    return;
 }

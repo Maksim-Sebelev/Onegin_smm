@@ -1,15 +1,15 @@
-#include "file_text.h"
+#include "read_text_from_file.h"
 
 char* read_buffer_from_file(struct Text_param* text_par, struct Inp_Out_files file)
 {
     FILE* fp = fopen(file.input_file, "r");
     if (fp == NULL)
     {
-        COLOR_PRINT_ONE_STR(RED, "Error: invalid file name\n");
+        COLOR_PRINT(RED, "Error: invalid file name\n");
         return NULL;
     }
 
-    text_par->text_len = count_file_len2(file.input_file);
+    text_par->text_len = count_file_len(file.input_file);
 
     char* buffer = NULL;
     buffer = (char*) calloc(text_par->text_len + 1, sizeof(char));
@@ -36,12 +36,13 @@ char* read_buffer_from_file(struct Text_param* text_par, struct Inp_Out_files fi
     }
 
     assert(buffer != NULL);
+
     return buffer;
 }
 
 
 
-struct Line* read_text_from_buffer(char* buffer, struct Text_param text_par)
+struct Line* split_buffer_in_str(char* buffer, struct Text_param text_par)
 {
     assert(buffer != NULL);
 
@@ -90,7 +91,7 @@ struct Line* read_text_from_file(struct Text_param* text_par, struct Inp_Out_fil
     assert(buffer != NULL);
 
     struct Line* text = NULL;
-    text = read_text_from_buffer(buffer, *text_par);
+    text = split_buffer_in_str(buffer, *text_par);
 
     assert(text_par->text_elem_size > 0);
     assert(text_par->text_len >= 0);
@@ -99,3 +100,27 @@ struct Line* read_text_from_file(struct Text_param* text_par, struct Inp_Out_fil
     return text;
 }
 
+
+size_t count_file_len(const char* file_name)
+{
+    FILE* fp = fopen(file_name, "r");
+    if (fp == NULL)
+    {
+        printf("Error: invalid file name\n");
+    }
+
+    size_t file_elem_quant = 0;
+
+    while(fgetc(fp) != EOF)
+    {
+        file_elem_quant++;
+    }
+    return file_elem_quant;
+}
+
+size_t count_file_len2(const char* file_name)
+{
+    struct stat buf = {};
+    stat(file_name, &buf);
+    return buf.st_size;
+}

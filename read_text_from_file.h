@@ -7,8 +7,10 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <assert.h>
-#include "helper_func.h"
+#include "str_func.h"
 #include "color_output.h"
+#include "text.h"
+
 
 
 
@@ -34,7 +36,7 @@ char* read_buffer_from_file(struct Text_param* text_par, struct Inp_Out_files fi
  * \param buffer_len - кол-во элементов в массиве buffer, из которого и получается массив text.
  */
 
-struct Line* read_text_from_buffer(char* buffer, struct Text_param text_par);
+struct Line* split_buffer_in_str(char* buffer, struct Text_param text_par);
 
 /**
  * Функция file_to_text построчно копирует (делает массив указателей) строки из файла в массив (с помощью функций make_buffer и make_text).
@@ -46,6 +48,10 @@ struct Line* read_text_from_buffer(char* buffer, struct Text_param text_par);
 struct Line* read_text_from_file(struct Text_param* text_par, struct Inp_Out_files file);
 
 
+size_t count_file_len(const char* file_name);
+
+//пока (или навсегда нерабочая версия через stat)
+size_t count_file_len2(const char* file_name);
 
 
 #endif

@@ -11,31 +11,6 @@
 #include <unistd.h>
 
 
-struct Line
-{
-    const char* str_begin_ptr = NULL;
-    size_t str_len = 0;
-};
-
-
-struct Text_param 
-{
-    size_t text_lines_quant = 0;
-    size_t text_len = 0;
-    size_t text_elem_size = sizeof(struct Line);
-    // const char** text = NULL;
-    struct Line* text = {};
-};
-
-
-struct Inp_Out_files
-{
-    const char* input_file = "text.txt";
-    const char* output_file = "sort_text.txt";
-    const char* clean_file = "clean_text.txt";
-};
-
-
 /**
  * функция found_letter позволяте найти первую (справа налево) букву в строке str начиная с иднекса str_i.
  * \param str есть искомая строка
@@ -83,15 +58,6 @@ size_t count_real_str_len(char* str, size_t str_len);
 
 void add_str_to_arr(char* arr, size_t arr_i, const char* str);
 
-
-size_t count_file_len(const char* file_name);
-
-//пока (или навсегда нерабочая версия через stat)
-size_t count_file_len2(const char* file_name);
-
-void swap_helper(void* p1, void* p2, size_t* size_type, size_t size_swap_type);
-
-void swap(void* p1, void* p2, size_t size);
 
 #endif
 
