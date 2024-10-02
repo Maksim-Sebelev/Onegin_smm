@@ -11,9 +11,6 @@
 #include "color_output.h"
 #include "text.h"
 
-
-
-
 enum Has_str_letter
 {   
     STR_HAS_LETTER = 0,
@@ -49,10 +46,6 @@ struct Line* read_text_from_file(struct Text_param* text_par, struct Inp_Out_fil
 
 
 size_t count_file_len(const char* file_name);
-
-//пока (или навсегда нерабочая версия через stat)
-size_t count_file_len2(const char* file_name);
-
 
 #endif
 

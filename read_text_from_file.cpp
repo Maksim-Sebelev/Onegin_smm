@@ -117,10 +117,3 @@ size_t count_file_len(const char* file_name)
     }
     return file_elem_quant;
 }
-
-size_t count_file_len2(const char* file_name)
-{
-    struct stat buf = {};
-    stat(file_name, &buf);
-    return buf.st_size;
-}

@@ -28,16 +28,8 @@ char* write_text_in_buffer(struct Text_param text_par);
 void write_text_in_file(struct Text_param tex_par, struct Inp_Out_files file);
 
 
-
-/**
- * 
- */
-
 void make_final_file(struct Text_param text_par, struct Inp_Out_files file);
 
-/**
- * 
- */
 void make_final_text(struct Text_param* text_par, struct Inp_Out_files file);
 
 

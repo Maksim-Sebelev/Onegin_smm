@@ -11,22 +11,6 @@
 #include "text.h"
 
 
-
-// const size_t FLAGS_QUANT = 7;
-
-// typedef Flag_error_type (*Flag_func_type)(const int, const char**, size_t, struct Text_param*, struct Inp_Out_files*);
-
-// const Flag_func_type flags_func[FLAGS_QUANT] = 
-// {
-//     red_flag,
-//     blue_flag,
-//     green_flag,
-//     white_flag,
-//     RUSSIA_flag,
-//     ChangeInputFile_flag,
-//     ChangeOuputFile_flag
-// };
-
 enum Flag_error_type
 {
     NO_INPUT = 0,
