@@ -1,19 +1,6 @@
 #include <sys/stat.h>
 #include "str_func.h"
 
-
-int find_str_end(const char* str)
-{
-    int str_i = 0;
-    while(str[str_i] != '\0' && str[str_i] != '\r' && str[str_i] != '\n')
-    {
-        str_i++;
-    } 
-
-    return str_i;
-}
-
-
 void find_last_letter(const char str[], int* str_i)
 {
     while((isalpha(str[*str_i]) == 0) && (str[*str_i] != '\0'))

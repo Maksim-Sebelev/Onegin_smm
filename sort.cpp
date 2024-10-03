@@ -74,7 +74,7 @@ void text_sort(struct Text_param* text_par)
 
 
 
-void swap_helper(void* p1, void* p2, size_t* size_type, size_t size_swap_type)
+static void swap_helper(void* p1, void* p2, size_t* size_type, size_t size_swap_type)
 {
     while (*size_type >= size_swap_type)
     {
